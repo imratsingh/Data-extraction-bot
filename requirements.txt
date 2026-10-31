@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic>=2
+langchain-core==1.7.3
+langchain-google-genai==4.4.2
+langchain-ollama==1.1.0
+langchain-openai==1.7.3
+python-dotenv
+pytest
+httpx

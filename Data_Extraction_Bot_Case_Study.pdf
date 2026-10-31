@@ -1,0 +1,223 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+6 0 obj
+<< /Length 4540 >>
+stream
+1.000 1.000 1.000 rg 0 0 595 842 re f
+0.180 0.430 0.670 rg BT /F2 9 Tf 42.0 812.0 Td (DATA EXTRACTION BOT) Tj ET
+0.430 0.490 0.560 rg BT /F1 8 Tf 441.0 812.0 Td (PROJECT CASE STUDY) Tj ET
+0.820 0.860 0.900 RG 0.8 w 42 800 m 553 800 l S
+0.930 0.960 0.990 rg 42 705 511 75 re f
+0.180 0.430 0.670 rg 42 705 6 75 re f
+0.100 0.280 0.450 rg BT /F2 25 Tf 64.0 747.0 Td (Data Extraction Bot) Tj ET
+0.320 0.400 0.490 rg BT /F1 11 Tf 64.0 724.0 Td (Turning resume and invoice text into structured data) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 676.0 Td (1. Introduction) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 654.0 Td (Resumes and invoices often contain useful information in free-form text. Finding and) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 638.0 Td (retyping details by hand takes time and can lead to inconsistent records. The Data) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 622.1 Td (Extraction Bot is a Python API that uses a language model to read supplied text and) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 606.1 Td (return selected details as validated JSON.) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 578.2 Td (2. Problem and goal) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 556.2 Td (Different documents describe similar facts in different ways. A computer application) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 540.2 Td (needs those facts in predictable fields. This project accepts resume or invoice text,) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 524.3 Td (identifies the requested information, and arranges it into a consistent response) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 508.3 Td (structure.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 489.4 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 489.4 Td (Extract key fields from resume text, such as name, email, skills, education, and) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 474.4 Td (experience.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 457.4 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 457.4 Td (Extract invoice details, such as invoice number, parties, line items, tax, and total.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 440.4 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 440.4 Td (Return validated JSON that another application can read.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 423.4 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 423.4 Td (Avoid making up missing facts; unknown optional details are returned as null, and) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 408.4 Td (collections as empty lists.) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 382.4 Td (3. How the system works) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 360.4 Td (A client sends text to a FastAPI endpoint. The extractor provides the text and a) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 344.4 Td (task-specific schema to a configured language model through LangChain structured output.) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 328.5 Td (Pydantic checks the returned data before FastAPI sends JSON to the client.) Tj ET
+0.955 0.969 0.980 rg 42 268.5499999999998 511 44 re f
+0.180 0.430 0.670 rg 42 268.5499999999998 4 44 re f
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 296.5 Td (Client text  ->  FastAPI endpoint  ->  LangChain extractor) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 283.5 Td (    ->  Configured LLM  ->  Pydantic validation  ->  JSON response) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 248.5 Td (4. Main API endpoints) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 226.5 Td (POST /extract/resume accepts a JSON body containing text and returns ResumeData fields:) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 210.6 Td (name, email, phone, skills, education, experience, and summary.) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 191.6 Td (POST /extract/invoice accepts a JSON body containing text and returns InvoiceData fields:) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 175.7 Td (invoice number/date, vendor/customer, line items, subtotal, tax, total amount, and) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 159.7 Td (currency.) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 140.8 Td (GET /health reports that the API is running, plus the active provider and configured) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 124.8 Td (model. Interactive API documentation is available at /docs.) Tj ET
+0.82 0.86 0.90 RG 0.7 w 42 45 m 553 45 l S
+0.43 0.49 0.56 rg BT /F1 8 Tf 42 29 Td (Data Extraction Bot | Case Study) Tj ET
+0.43 0.49 0.56 rg BT /F1 8 Tf 520 29 Td (1) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 5075 >>
+stream
+1.000 1.000 1.000 rg 0 0 595 842 re f
+0.180 0.430 0.670 rg BT /F2 9 Tf 42.0 812.0 Td (DATA EXTRACTION BOT) Tj ET
+0.430 0.490 0.560 rg BT /F1 8 Tf 441.0 812.0 Td (PROJECT CASE STUDY) Tj ET
+0.820 0.860 0.900 RG 0.8 w 42 800 m 553 800 l S
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 771.0 Td (5. Example: invoice extraction) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 749.0 Td (Input text:) Tj ET
+0.955 0.969 0.980 rg 42 689.05 511 44 re f
+0.180 0.430 0.670 rg 42 689.05 4 44 re f
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 717.0 Td (Invoice INV-45. Vendor: ABC Store. Customer: Rahul.) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 704.0 Td (2 chairs at $500 each. Total: $1,000.) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 678.0 Td (Example response:) Tj ET
+0.955 0.969 0.980 rg 42 436.0999999999999 511 226 re f
+0.180 0.430 0.670 rg 42 436.0999999999999 4 226 re f
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 646.1 Td ({) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 633.1 Td (  "invoice_number": "INV-45",) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 620.1 Td (  "invoice_date": null,) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 607.1 Td (  "vendor_name": "ABC Store",) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 594.1 Td (  "customer_name": "Rahul",) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 581.1 Td (  "line_items": [{) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 568.1 Td (    "description": "chairs",) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 555.1 Td (    "quantity": 2,) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 542.1 Td (    "unit_price": 500,) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 529.1 Td (    "amount": 1000) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 516.1 Td (  }],) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 503.1 Td (  "subtotal": null,) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 490.1 Td (  "tax": null,) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 477.1 Td (  "total_amount": 1000,) Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 464.1 Td (  "currency": "USD") Tj ET
+0.130 0.200 0.280 rg BT /F3 8.5 Tf 56.0 451.1 Td (}) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 425.1 Td (The date, subtotal, and tax were not present in the input, so the bot left them null) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 409.1 Td (rather than guessing.) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 381.2 Td (6. Technology) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 359.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 359.2 Td (Python and FastAPI: application and HTTP API.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 342.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 342.2 Td (Pydantic v2: schemas and response validation.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 325.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 325.2 Td (LangChain with structured output: connects model responses to the requested schema.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 308.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 308.2 Td (Gemini, Ollama, or OpenAI: selectable provider, configured with environment variables.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 291.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 291.2 Td (Pytest and HTTPX: automated tests using mocked LLM responses.) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 265.2 Td (7. Reliability and safety) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 243.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 243.2 Td (Empty text is rejected; overly long input is limited by configuration.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 226.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 226.2 Td (Temporary provider failures are retried up to three times with exponential backoff.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 209.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 209.2 Td (Invalid model output is reported as a validation error.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 192.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 192.2 Td (Logs avoid document contents and API keys. Provider keys belong in the local .env file, not) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 177.2 Td (in source control.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 160.2 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 160.2 Td (Missing information is not intentionally invented by the extraction prompt.) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 134.2 Td (8. Testing and observed results) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 112.2 Td (Automated tests passed: 13 passed. Tests cover resume and invoice extraction with fake) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 96.2 Td (LLM responses, empty and oversized input, retry behavior, missing values, validation) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 80.3 Td (errors, provider configuration, and the health endpoint. Live Swagger checks also) Tj ET
+0.82 0.86 0.90 RG 0.7 w 42 45 m 553 45 l S
+0.43 0.49 0.56 rg BT /F1 8 Tf 42 29 Td (Data Extraction Bot | Case Study) Tj ET
+0.43 0.49 0.56 rg BT /F1 8 Tf 520 29 Td (2) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 527 >>
+stream
+1.000 1.000 1.000 rg 0 0 595 842 re f
+0.180 0.430 0.670 rg BT /F2 9 Tf 42.0 812.0 Td (DATA EXTRACTION BOT) Tj ET
+0.430 0.490 0.560 rg BT /F1 8 Tf 441.0 812.0 Td (PROJECT CASE STUDY) Tj ET
+0.820 0.860 0.900 RG 0.8 w 42 800 m 553 800 l S
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 780.0 Td (returned HTTP 200 for a resume example and an invoice example.) Tj ET
+0.82 0.86 0.90 RG 0.7 w 42 45 m 553 45 l S
+0.43 0.49 0.56 rg BT /F1 8 Tf 42 29 Td (Data Extraction Bot | Case Study) Tj ET
+0.43 0.49 0.56 rg BT /F1 8 Tf 520 29 Td (3) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 3344 >>
+stream
+1.000 1.000 1.000 rg 0 0 595 842 re f
+0.180 0.430 0.670 rg BT /F2 9 Tf 42.0 812.0 Td (DATA EXTRACTION BOT) Tj ET
+0.430 0.490 0.560 rg BT /F1 8 Tf 441.0 812.0 Td (PROJECT CASE STUDY) Tj ET
+0.820 0.860 0.900 RG 0.8 w 42 800 m 553 800 l S
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 771.0 Td (9. Limitations) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 749.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 749.0 Td (The current API accepts plain text; it does not upload or parse PDF/image files.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 732.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 732.0 Td (Extraction quality depends on the selected model and the clarity of the input.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 715.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 715.0 Td (Schema validation checks the response format, but does not independently verify every fact) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 700.0 Td (or reconcile invoice arithmetic.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 683.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 683.0 Td (The project is a backend API and does not currently include a user-facing web form or) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 668.0 Td (database.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 651.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 651.0 Td (Cloud model providers process submitted text according to their own terms and policies;) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 636.0 Td (sensitive data requires careful handling.) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 610.0 Td (10. Future improvements) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 588.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 588.0 Td (Add PDF and image upload with document text extraction or OCR.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 571.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 571.0 Td (Build a simple web interface for entering text and viewing results.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 554.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 554.0 Td (Add optional database storage, authentication, and usage limits.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 537.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 537.0 Td (Add domain-specific checks for dates, currency, totals, and required fields.) Tj ET
+0.180 0.430 0.670 rg BT /F2 11 Tf 49.0 520.0 Td (-) Tj ET
+0.160 0.210 0.290 rg BT /F1 10.5 Tf 63.0 520.0 Td (Add more test documents and compare extraction quality across supported models.) Tj ET
+0.120 0.320 0.520 rg BT /F2 15 Tf 42.0 494.0 Td (11. Conclusion) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 472.0 Td (The Data Extraction Bot demonstrates how unstructured resume and invoice text can be) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 456.1 Td (converted into consistent, machine-readable JSON. It reduces repetitive manual data entry) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 440.1 Td (and provides a foundation that can be extended with file uploads, a user interface, and) Tj ET
+0.160 0.210 0.290 rg BT /F1 11 Tf 42.0 424.2 Td (stronger business validation.) Tj ET
+0.82 0.86 0.90 RG 0.7 w 42 45 m 553 45 l S
+0.43 0.49 0.56 rg BT /F1 8 Tf 42 29 Td (Data Extraction Bot | Case Study) Tj ET
+0.43 0.49 0.56 rg BT /F1 8 Tf 520 29 Td (4) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000141 00000 n 
+0000000211 00000 n 
+0000000286 00000 n 
+0000000354 00000 n 
+0000004946 00000 n 
+0000005092 00000 n 
+0000010219 00000 n 
+0000010365 00000 n 
+0000010944 00000 n 
+0000011092 00000 n 
+0000014489 00000 n 
+trailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+14637
+%%EOF
