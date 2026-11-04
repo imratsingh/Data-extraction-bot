@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f6fa">
+    <meta name="description" content="Turn resume and invoice text into structured, validated JSON.">
+    <title>Extractly — Data Extraction</title>
+    <link rel="stylesheet" href="/styles.css?v=2">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Extractly home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 3.75h7l4.25 4.3v12.2H7a2 2 0 0 1-2-2v-12.5a2 2 0 0 1 2-2Z" />
+            <path d="M14 4v4.5h4.5M8.5 12h7M8.5 15.5h7" />
+          </svg>
+        </span>
+        <span>extractly<span class="brand-period">.</span></span>
+      </a>
+      <div class="topbar-right">
+        <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">API docs <span aria-hidden="true">↗</span></a>
+        <span class="connection" id="connection-status">
+          <span class="connection-dot" aria-hidden="true"></span>
+          <span id="connection-label">Checking API</span>
+        </span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="intro">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR DOCUMENT, STRUCTURED</div>
+        <h1>Less manual work.<br><span>More useful data.</span></h1>
+        <p>Upload a PDF or paste text. Get clean, structured resume and invoice data in seconds.</p>
+      </section>
+
+      <section class="workspace" aria-label="Document extraction">
+        <form class="input-panel" id="extract-form">
+          <div class="panel-heading">
+            <div>
+              <span class="step-label">STEP 01</span>
+              <h2>Choose your document</h2>
+            </div>
+            <span class="private-note">
+              <svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M8 1.75 13 4v3.7c0 3-2.1 5.4-5 6.55C5.1 13.1 3 10.7 3 7.7V4l5-2.25Z" /><path d="m5.9 7.9 1.35 1.35 2.85-3" /></svg>
+              AI-powered extraction
+            </span>
+          </div>
+
+          <label class="field-label" for="document-type">DOCUMENT TYPE</label>
+          <div class="select-wrap">
+            <select id="document-type" name="document-type">
+              <option value="resume">Resume</option>
+              <option value="invoice">Invoice</option>
+            </select>
+            <svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="m4 6 4 4 4-4" /></svg>
+          </div>
+
+          <div class="input-tabs" role="tablist" aria-label="Document input method">
+            <button class="input-tab is-active" id="pdf-tab" type="button" role="tab" aria-selected="true" aria-controls="pdf-panel">Upload PDF</button>
+            <button class="input-tab" id="text-tab" type="button" role="tab" aria-selected="false" aria-controls="text-panel">Paste text</button>
+          </div>
+
+          <div class="input-method" id="pdf-panel" role="tabpanel" aria-labelledby="pdf-tab">
+            <input id="pdf-file" type="file" accept=".pdf,application/pdf" hidden>
+            <button class="dropzone" id="dropzone" type="button">
+              <span class="upload-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" /></svg>
+              </span>
+              <span class="dropzone-title">Drop your PDF here</span>
+              <span class="dropzone-subtitle">or <span class="browse-link">browse files</span></span>
+              <span class="file-limit">PDF files only · up to 10 MB</span>
+            </button>
+            <div class="selected-file" id="selected-file" hidden>
+              <span class="pdf-badge" aria-hidden="true">PDF</span>
+              <span class="selected-file-info"><strong id="file-name"></strong><small id="file-size"></small></span>
+              <button class="remove-file" id="remove-file" type="button" aria-label="Remove selected PDF">×</button>
+            </div>
+            <p class="upload-note">Text-based PDFs work best. Scanned PDFs require OCR.</p>
+          </div>
+
+          <div class="input-method" id="text-panel" role="tabpanel" aria-labelledby="text-tab" hidden>
+            <div class="textarea-heading">
+              <label class="field-label" for="document-text">DOCUMENT TEXT</label>
+              <button class="text-button" id="load-example" type="button">Load example <span aria-hidden="true">↗</span></button>
+            </div>
+            <textarea id="document-text" name="text" placeholder="Paste the text from your resume or invoice here..."></textarea>
+            <div class="input-footer">
+              <span id="character-count">0 characters</span>
+              <button class="text-button clear-button" id="clear-text" type="button">Clear</button>
+            </div>
+          </div>
+
+          <div class="form-error" id="form-error" role="alert" hidden></div>
+          <button class="submit-button" id="submit-button" type="submit">
+            <span class="submit-label">Extract data</span>
+            <svg class="submit-arrow" aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="M4.5 10h11m-4.5-4.5L15.5 10 11 14.5" /></svg>
+          </button>
+          <p class="form-footnote">Your document is processed by the configured language model.</p>
+        </form>
+
+        <section class="result-panel" aria-labelledby="result-title">
+          <div class="panel-heading result-heading">
+            <div>
+              <span class="step-label">STEP 02</span>
+              <h2 id="result-title">Your results</h2>
+            </div>
+            <button class="copy-button" id="copy-result" type="button" disabled>
+              <svg aria-hidden="true" viewBox="0 0 18 18" fill="none"><rect x="6" y="6" width="9" height="9" rx="1.5" /><path d="M12 6V4.5A1.5 1.5 0 0 0 10.5 3h-6A1.5 1.5 0 0 0 3 4.5v6A1.5 1.5 0 0 0 4.5 12H6" /></svg>
+              <span>Copy JSON</span>
+            </button>
+          </div>
+
+          <div class="result-content" id="result-content" aria-live="polite" aria-busy="false">
+            <div class="empty-state" id="empty-state">
+              <div class="empty-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M14 7.5h14l8.5 8.6v23.4h-22a3 3 0 0 1-3-3v-26a3 3 0 0 1 2.5-3Z" /><path d="M28 8v9h9M18 25h14M18 31h9" /></svg>
+              </div>
+              <h3>Nothing here yet</h3>
+              <p>Your extracted data will appear here, ready to copy.</p>
+              <span class="empty-hint">JSON · VALIDATED · STRUCTURED</span>
+            </div>
+            <div class="loading-state" id="loading-state" hidden>
+              <span class="loading-spinner" aria-hidden="true"></span>
+              <span>Extracting your data...</span>
+            </div>
+            <div class="result-output" id="result-output" hidden>
+              <div class="output-meta"><span class="success-indicator"></span><span id="result-caption">Extraction complete</span></div>
+              <pre><code id="result-json"></code></pre>
+            </div>
+          </div>
+          <div class="result-footer">
+            <span><span class="footer-dot"></span> Structured output</span>
+            <span>Powered by your configured LLM</span>
+          </div>
+        </section>
+      </section>
+
+      <footer class="page-footer">
+        <span>Extractly <span class="footer-separator">/</span> Data Extraction Bot</span>
+        <span>Built for turning unstructured text into something useful.</span>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,11 +1,12 @@
 # Data Extraction Bot
 
-A FastAPI service that uses a configurable LangChain chat model to extract explicitly stated resume or invoice details into validated JSON. The service supports Ollama, Google Gemini, and OpenAI.
+A FastAPI service with a custom web interface that uses a configurable LangChain chat model to extract explicitly stated resume or invoice details into validated JSON. The service supports Ollama, Google Gemini, and OpenAI.
 
 ## Features
 
 - Structured resume and invoice extraction using LangChain `with_structured_output`.
 - Pydantic v2 response schemas with field descriptions.
+- Upload text-based PDFs for resume and invoice extraction (scanned PDFs require OCR).
 - Switchable LLM provider and model through environment variables.
 - Input length limits, retry with exponential backoff, safe provider errors, and basic non-sensitive logging.
 - Interactive API documentation at `/docs`.
@@ -14,7 +15,8 @@ A FastAPI service that uses a configurable LangChain chat model to extract expli
 
 ```text
 Client
-  -> FastAPI endpoint (input checks)
+  -> FastAPI endpoint (text or PDF input checks)
+  -> PDF text extraction when a PDF is uploaded
   -> Extractor (anti-hallucination prompt + up to 3 attempts)
   -> LangChain structured output
   -> Ollama | Gemini | OpenAI
@@ -32,7 +34,11 @@ data-extraction-bot/
 |   |-- extractor.py
 |   |-- llm.py
 |   |-- main.py
-|   `-- schemas.py
+|   |-- schemas.py
+|   `-- static/
+|       |-- app.js
+|       |-- index.html
+|       `-- styles.css
 |-- tests/
 |   |-- test_api.py
 |   `-- test_extractor.py
@@ -70,7 +76,7 @@ Model names are intentionally supplied through `LLM_MODEL`, not hardcoded by the
 uvicorn app.main:app --reload
 ```
 
-Open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) for Swagger UI. `GET /health` reports the status, provider, and configured model name.
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) for the web interface. Select a resume or invoice, upload a text-based PDF (up to 10 MB) or paste text, then view or copy the extracted JSON. Scanned PDFs require OCR and are not supported directly. Open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) for Swagger UI. `GET /health` reports the status, provider, and configured model name.
 
 ## Example requests
 
